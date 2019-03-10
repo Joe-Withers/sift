@@ -1,0 +1,9 @@
+function [all_feature_coordinates, all_features] = sift(image, scale_size, sigma)
+all_feature_coordinates = [];
+all_features = [];
+octaves = 1;
+im = image;
+peaks = DoG_blob_detector(im, scale_size, sigma, octaves);
+[feature_coordinates, features] = sift_descriptors(peaks(:,1:4), im, scale_size, sigma);
+all_feature_coordinates = [all_feature_coordinates; feature_coordinates];
+all_features = [all_features; features];
